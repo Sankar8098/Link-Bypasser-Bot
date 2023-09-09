@@ -1971,8 +1971,8 @@ def tnshort(url):
         return "Something went wrong :("
 
 #####################################################################################################
-# vipurl
-def vipurl(url):
+# shrink
+def shrink(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     DOMAIN = "https://upshrink.com/"
     url = url[:-1] if url[-1] == "/" else url
@@ -2351,6 +2351,11 @@ def shortners(url):
     elif "https://link.tnshort.net/" in url:
         print("entered tnshort:", url)
         return tnshort(url)
+
+ # shrink
+    elif "upshrink.com" in url:
+        print("entered upshrink:",url)
+        return upshrink(url)
 
     # tnvalue
     elif "https://link.tnvalue.in/" in url or "https://short.tnvalue.in/" in url or "https://page.finclub.in/" in url:
