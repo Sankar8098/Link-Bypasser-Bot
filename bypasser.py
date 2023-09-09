@@ -1972,7 +1972,7 @@ def tnshort(url):
 
 #####################################################################################################
 # shrink
-def shrink(url):
+def shrx(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     DOMAIN = "https://upshrink.com/"
     url = url[:-1] if url[-1] == "/" else url
