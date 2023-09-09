@@ -2353,9 +2353,9 @@ def shortners(url):
         return tnshort(url)
 
  # shrink
-    elif "upshrink.com" in url:
-        print("entered upshrink:",url)
-        return upshrink(url)
+    elif "shrx.in" in url:
+        print("entered shrx:",url)
+        return shrx(url)
 
     # tnvalue
     elif "https://link.tnvalue.in/" in url or "https://short.tnvalue.in/" in url or "https://page.finclub.in/" in url:
