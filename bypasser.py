@@ -1974,11 +1974,11 @@ def tnshort(url):
 # shrink
 def shrx(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
-    DOMAIN = "https://upshrink.com/"
+    DOMAIN = "https://techcyan.com/"
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://techcyan.com/"
+    ref = "https://upshrink.com/"
     h = {"referer": ref}
     response = client.get(final_url, headers=h)
     soup = BeautifulSoup(response.text, "html.parser")
