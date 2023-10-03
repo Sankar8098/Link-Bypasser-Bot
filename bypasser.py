@@ -1952,7 +1952,7 @@ def mdiskpro(url):
 
 def pkin(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
-    DOMAIN = "https://go.tnshort.net/"
+    DOMAIN = "https://go.paisakamalo.in/"
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
@@ -2375,6 +2375,11 @@ def shortners(url):
     elif "https://link.tnshort.net/" in url:
         print("entered tnshort:", url)
         return tnshort(url)
+
+   # pkin
+    elif "https://pkin.me/" in url:
+        print("entered pkin:", url)
+        return pkin(url)
 
  # shrink
     elif "shrx.in" in url:
