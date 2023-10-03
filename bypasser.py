@@ -1956,7 +1956,7 @@ def pkin(url):
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://market.finclub.in/"
+    ref = "https://techkeshri.com/"
     h = {"referer": ref}
     resp = client.get(final_url, headers=h)
     soup = BeautifulSoup(resp.content, "html.parser")
@@ -1979,7 +1979,7 @@ def tnshort(url):
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://techkeshri.com/"
+    ref = "https://market.finclub.in/"
     h = {"referer": ref}
     resp = client.get(final_url, headers=h)
     soup = BeautifulSoup(resp.content, "html.parser")
