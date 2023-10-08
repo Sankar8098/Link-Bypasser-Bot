@@ -108,26 +108,13 @@ def loopthread(message,otherss=False):
 
 
 # start command
-@app.on_message(filters.command(["help"]))
-async def start(client,message):
-	old = insert(int(message.chat.id))
-	user_id = message.from_user.id
-	letdata = profind(int(user_id))
-	try:
-	    procode = letdata["promo"]
-	except:
-	    pass	
-	try:
-	    id = message.text.split(' ')[1]
-	except:
-	    await message.reply_text(text =f"""
-	Hello {wish} {message.from_user.first_name }
-	__I am file renamer bot, Please sent any telegram 
-	**Document Or Video** and enter new filename to rename it__
-	""",reply_to_message_id = message.id ,  
-	reply_markup=InlineKeyboardMarkup(
-	 [[ InlineKeyboardButton("Support 🇮🇳" ,url="https://t.me/lntechnical") ], 
-	[InlineKeyboardButton("Subscribe 🧐", url="https://youtube.com/c/LNtechnical") ]
+@app.on_message(filters.command(["start"]))
+def send_start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+    app.send_message(message.chat.id, f"__👋 Hi **{message.from_user.mention}**, i am Link Bypasser Bot, just send me any supported links and i will you get you results.\nCheckout /help to Read More__",
+    reply_markup=InlineKeyboardMarkup([
+        [ InlineKeyboardButton("🌐 Source Code", url="https://github.com/bipinkrish/Link-Bypasser-Bot")],
+        [ InlineKeyboardButton("Replit", url="https://replit.com/@bipinkrish/Link-Bypasser#app.py") ]]), 
+        reply_to_message_id=message.id)
 
 
 # help command
