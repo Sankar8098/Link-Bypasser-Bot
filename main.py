@@ -108,7 +108,7 @@ def loopthread(message,otherss=False):
 
 
 # start command
-@app.on_message(filters.private & filters.command(["start"]))
+@app.on_message(filters.command(["help"]))
 async def start(client,message):
 	old = insert(int(message.chat.id))
 	user_id = message.from_user.id
