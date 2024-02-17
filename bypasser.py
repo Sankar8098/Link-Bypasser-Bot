@@ -138,6 +138,35 @@ def scrapeIndex(url, username="none", password="none"):
     if len(result)==0: return None
     return format(result)
 
+################################################################
+# Shortner Full Page API
+
+def shortner_fpage_api(link):
+    link_pattern = r"https?://[\w.-]+/full\?api=([^&]+)&url=([^&]+)(?:&type=(\d+))?"
+    match = re.match(link_pattern, link)
+    if match:
+        try:
+            url_enc_value = match.group(2)
+            url_value = base64.b64decode(url_enc_value).decode("utf-8")
+            return url_value
+        except BaseException:
+            return None
+    else:
+        return None
+
+# Shortner Quick Link API
+
+def shortner_quick_api(link):
+    link_pattern = r"https?://[\w.-]+/st\?api=([^&]+)&url=([^&]+)"
+    match = re.match(link_pattern, link)
+    if match:
+        try:
+            url_value = match.group(2)
+            return url_value
+        except BaseException:
+            return None
+    else:
+        return None
 
 ##############################################################
 # tnlink
@@ -1659,7 +1688,7 @@ def onepagelink(url):
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"https://{DOMAIN}/{code}"
-    ref = "market.gorating.in"
+    ref = "https://gorating.in/"
     h = {"referer": ref}
     response = client.get(final_url, headers=h)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -1969,7 +1998,7 @@ def tnshort(url):
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://market.finclub.in/"
+    ref = "https://jrlinks.in/"
     h = {"referer": ref}
     resp = client.get(final_url, headers=h)
     soup = BeautifulSoup(resp.content, "html.parser")
@@ -2034,11 +2063,11 @@ def tnvalue(url):
 
 def tnvalue(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
-    DOMAIN = "https://page.finclub.in"
+    DOMAIN = "https://gadgets.webhostingtips.club/"
     url = url[:-1] if url[-1] == "/" else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://finclub.in/"
+    ref = "https://earnme.club/"
     h = {"referer": ref}
     resp = client.get(final_url, headers=h)
     soup = BeautifulSoup(resp.content, "html.parser")
@@ -2131,6 +2160,27 @@ def vipurl(url):
         return r.json()["url"]
     except BaseException:
         return "Something went wrong :("
+##################################################################################################### 
+#mdisky.link
+def mdisky(url):
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    DOMAIN = "https://go.bloggingaro.com/"
+    url = url[:-1] if url[-1] == "/" else url
+    code = url.split("/")[-1]
+    final_url = f"{DOMAIN}/{code}"
+    ref = "https://www.bloggingaro.com/"
+    h = {"referer": ref}
+    resp = client.get(final_url, headers=h)
+    soup = BeautifulSoup(resp.content, "html.parser")
+    inputs = soup.find_all("input")
+    data = {input.get("name"): input.get("value") for input in inputs}
+    h = {"x-requested-with": "XMLHttpRequest"}
+    time.sleep(6)
+    r = client.post(f"{DOMAIN}/links/go", data=data, headers=h)
+    try:
+        return str(r.json()["url"])
+    except BaseException:
+        return "Something went wrong :("
 
 ##################################################################################################### 
 # bitly + tinyurl
@@ -2162,9 +2212,16 @@ def ispresent(inlist,url):
 
 # shortners
 def shortners(url):
+    # Shortner Full Page API
+    if val := shortner_fpage_api(url):
+        return val
+
+    # Shortner Quick Link API
+    elif val := shortner_quick_api(url):
+        return val
     
     # igg games
-    if "https://igg-games.com/" in url:
+    elif "https://igg-games.com/" in url:
         print("entered igg: ",url)
         return igggames(url)
 
@@ -2438,6 +2495,11 @@ def shortners(url):
     elif "link.vipurl.in" in url or "count.vipurl.in" in url or "vipurl.in" in url:
         print("entered vipurl:",url)
         return vipurl(url)
+
+    # mdisky
+    elif "mdisky.link" in url:
+        print("entered mdisky:", url)
+        return mdisky(url)
         
     # htpmovies sharespark cinevood
     elif "https://htpmovies." in url or 'https://sharespark.me/' in url or "https://cinevood." in url or "https://atishmkv." in url \
